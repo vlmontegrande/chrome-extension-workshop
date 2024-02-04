@@ -1,2 +1,2 @@
-# ACM-Hack-ChromeExtension
-Crash Course: Chrome Extension
+# Crash Course: Chrome Extension
+
