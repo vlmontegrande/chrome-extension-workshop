@@ -1,0 +1,11 @@
+{
+    "appName": {
+        "message": "TranscriptSummerizer"
+    },
+    "appShortName": {
+        "message": "TranscriptSummerizer"
+    },
+    "appDescription": {
+        "message": "Extracts lecture transcripts available in Media Gallery in Canvas, converts them into markdown notes, and puts them into Notion"
+    }
+}
