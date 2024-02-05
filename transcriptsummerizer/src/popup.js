@@ -5,9 +5,13 @@ function injectTheScript() {
     })
 }
 
+// Connecting our button with our content_script using an event listener
 document.getElementById('clickactivity').addEventListener('click', injectTheScript)
 
 
+// Add a listener to update the html when a message is sent by another part of the
+// extension. Generally when we want parts of the extension to communicate with each
+// other we use `chrome.runtime.sendMessage()`.
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.data) {
         // If data is received, update the hello.html popup with the fetched data
