@@ -1,6 +1,6 @@
 {
-    "name": "transcriptsummerizer",
-    "description": "Extracts lecture transcripts available in Media Gallery in Canvas, converts them into markdown notes, and puts them into Notion",
+    "name": "acm-hack-chrome-extension",
+    "description": "canvas transcript summarizer",
     "version": "0.0.1",
     "homepage": "http://chrome.google.com/webstore",
     "author": "ENTER YOUR NAME HERE",
@@ -41,9 +41,21 @@
     "xtbuild": {
         "js_bundles": [
             {
-                "name": "background",
-                "src": "./src/**/*.js"
+                "name": "popup",
+                "src": "./src/popup.js"
+            },
+            {
+                "name": "content_script",
+                "src": "./src/content_script.js"
+            },
+            {
+                "name": "env",
+                "src": "./src/env.js"
             }
         ]
+    },
+    "dependencies": {
+        "@google/generative-ai": "^0.2.0",
+        "dotenv": "^16.4.1"
     }
 }

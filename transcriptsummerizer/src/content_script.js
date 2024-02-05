@@ -1,3 +1,8 @@
+import { GoogleGenerativeAI } from "@google/generative-ai";
+import {env_var} from "./env"
+
+const genAI = new GoogleGenerativeAI(env_var.GEMINI_API_KEY);
+
 //-------------------ACTIVITY 2 -----------------
 async function clickAttachementsButton() {
     // Get the html button of the Attachements tab using document.querySelector()
