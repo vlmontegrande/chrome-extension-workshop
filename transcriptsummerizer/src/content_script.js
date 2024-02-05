@@ -1,3 +1,4 @@
+//-------------------ACTIVITY 2 -----------------
 async function clickAttachementsButton() {
     // Get the html button of the Attachements tab using document.querySelector()
     // const attachmentsButton = TODO
@@ -33,3 +34,32 @@ async function fetchTranscriptData() {
 
     return response.text();
 }
+
+
+//-------------------ACTIVITY 3 -----------------
+async function paraphraseTranscript(data) {
+    const model = genAI.getGenerativeModel({ model: "gemini-pro"});
+    const prompt = "YOUR TURN TO PROMT ENGINEER THIS";
+    // TOD Use generateContent() with your promt and store in result
+
+    const response = await result.response;
+    const text = await response.text();
+    chrome.runtime.sendMessage({ data: text });
+}
+
+async function downloadAndParaphraseTranscript() {
+    try {
+        const data = await fetchTranscriptData();
+        await paraphraseTranscript(data);
+    } catch (error) {
+        console.error('Error in processing transcript:', error);
+        chrome.runtime.sendMessage({ error: error.message });
+    }
+}
+
+async function executeTasks() {
+    await clickSubmitButton();
+    await downloadAndParaphraseTranscript(); 
+}
+
+executeTasks();
