@@ -4,13 +4,12 @@ import {env_var} from "./env"
 const genAI = new GoogleGenerativeAI(env_var.GEMINI_API_KEY);
 
 //-------------------ACTIVITY 2 -----------------
-async function clickAttachementsButton() {
+async function clickAttachmentsButton() {
     // Get the html button of the Attachements tab using document.querySelector()
-    // const attachmentsButton = TODO
+    const attachmentsButton = document.querySelector("#tab-attachments-tab > span"); 
     
     if (attachmentsButton) {
-        // TODO Click on the button using .click()
-        
+        attachmentsButton.click();
     
         // Give a little bit of time to process
         await new Promise(resolve => setTimeout(resolve, 1000));
@@ -22,19 +21,21 @@ async function clickAttachementsButton() {
 
 async function fetchTranscriptData() {
     // Get the html of the download transcript button
-    // const downloadLinkButton = TODO
+
+    const downloadLinkButton = document.querySelector("a.js-download-attachment-link");
     
     if (!downloadLinkButton) {
         throw new Error('Download link not found.');
     }
+    
 
     // Extract the url from the element using .getAttribute
-    // const url = TODO
+    const url = downloadLinkButton.getAttribute("href");
     
     // Fetch the url
     const response = await fetch(url);
     if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error('Network response was not ok :(');
     }
 
     return response.text();
@@ -44,9 +45,8 @@ async function fetchTranscriptData() {
 //-------------------ACTIVITY 3 -----------------
 async function paraphraseTranscript(data) {
     const model = genAI.getGenerativeModel({ model: "gemini-pro"});
-    const prompt = "YOUR TURN TO PROMT ENGINEER THIS";
-    // TOD Use generateContent() with your promt and store in result
-
+    const prompt = "Write a detailed summary of the following college lecture transcript. Make sure to include key points related to the subject: " + data + " Put it in markdown.";
+    const result = await model.generateContent(prompt);
     const response = await result.response;
     const text = await response.text();
     chrome.runtime.sendMessage({ data: text });
@@ -63,7 +63,7 @@ async function downloadAndParaphraseTranscript() {
 }
 
 async function executeTasks() {
-    await clickSubmitButton();
+    await clickAttachmentsButton();
     await downloadAndParaphraseTranscript(); 
 }
 

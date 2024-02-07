@@ -12,5 +12,13 @@
     "permissions": ["scripting"],
     "host_permissions": ["<all_urls>"],
     
-    
+    "action": {
+        "default_icon": {
+            "16": "assets/img/16x16.png",
+            "24": "assets/img/24x24.png",
+            "32": "assets/img/32x32.png"
+        },
+        "default_title": "Click me",
+        "default_popup": "hello.html"
+    }
 } 
